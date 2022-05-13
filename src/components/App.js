@@ -65,23 +65,30 @@ export default function HorizontalNonLinearStepper() {
   const Web3Api = useMoralisWeb3Api();
   const [nfts,setNfts] = useState([]);
   const [mywallet,setmyWallet] = useState("");
-  const fetchNFTs = async () => {
-    const address=mywallet;
-    const options = {
-      address: address,
-    };
+  // const fetchNFTs = async () => {
+  //   const address=mywallet;
+  //   const options = {};
+  //   options.address=address;
+  //   console.log("options: ",options);
+  //   const ethNFTs = await Web3Api.account.getNFTs(options);
+  //   console.log(ethNFTs.result);
+  //   setNfts(...nfts ,ethNFTs.result);
+  // };
+  const addwalletHandler=async(wallet)=>{
+    // console.log(wallet.wallet);
+    const address=wallet.wallet;
+    const options = {};
+    options.address=address;
     console.log("options: ",options);
     const ethNFTs = await Web3Api.account.getNFTs(options);
     console.log(ethNFTs.result);
     setNfts(...nfts ,ethNFTs.result);
-  };
-  const addwalletHandler=(wallet)=>{
-    console.log(wallet.wallet);
-    setmyWallet([...mywallet,wallet.wallet]);
+    // setmyWallet(...mywallet,wallet.wallet);
+    // console.log(mywallet);
   }
-  useEffect(()=>{
-    fetchNFTs();
-  },[mywallet]);
+  // useEffect(()=>{
+  //   fetchNFTs();
+  // },[mywallet]);
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
 
@@ -119,12 +126,12 @@ export default function HorizontalNonLinearStepper() {
     setActiveStep(step);
   };
 
-  const handleComplete = () => {
-    const newCompleted = completed;
-    newCompleted[activeStep] = true;
-    setCompleted(newCompleted);
-    handleNext();
-  };
+  // const handleComplete = () => {
+  //   const newCompleted = completed;
+  //   newCompleted[activeStep] = true;
+  //   setCompleted(newCompleted);
+  //   handleNext();
+  // };
 
   const handleReset = () => {
     setActiveStep(0);

@@ -3,14 +3,16 @@ import NFTCard from "./NFTCard";
 import List from '@mui/material/List';
 
 const GetNFTs = (props) => {
-    console.log(props);
+    console.log("Props:",props.nfts);
 
-    const rendernftlist=props.nfts.map((nft)=>{
+    const rendernftlist=props && props.nfts.length > 0? 
+    props.nfts.map((nft)=>{
         return(
-            <List sx={{ width: '100%',  bgcolor: 'background.paper' }}>
-            <NFTCard nft={nft}></NFTCard></List>
+            // <List sx={{ width: '100%',  bgcolor: 'background.paper' }}>
+            <NFTCard nft={nft}></NFTCard>
+            // </List>
         );
-    });
+    }): <span></span>;
 
     return (
         <div className="ui celled list container">
